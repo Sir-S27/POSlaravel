@@ -36,7 +36,7 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $p->kode_produk }}</td>
                 <td>{{ $p->nama_produk }}</td>
-                <td>{{ $p->nama_kategori ?? '-' }}</td>
+                <td>{{ $p->kategori->nama_kategori }}</td>
                 <td>{{ $p->harga }}</td>
                 <td>{{ $p->stok }}</td>
                 <td>

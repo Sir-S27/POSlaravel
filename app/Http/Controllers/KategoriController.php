@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,8 +11,13 @@ class KategoriController extends Controller
     {  
         $nama_kategori = $request->nama_kategori;
         //$kategori = DB::table('kategori');
-        $query = DB::table('kategori');
-        if ($nama_kategori != "") {
+        // $query = DB::table('kategori');
+        // if ($nama_kategori != "") {
+        //     $query->where('nama_kategori', 'like', '%'.$nama_kategori.'%');
+        // }
+        // $kategori = $query->paginate(5);
+        $query = Kategori::query();
+        if ($nama_kategori !="") {
             $query->where('nama_kategori', 'like', '%'.$nama_kategori.'%');
         }
         $kategori = $query->paginate(5);
@@ -21,7 +26,8 @@ class KategoriController extends Controller
 
     public function edit($id)
     {
-        $kategori = DB::table('kategori')->where(' id', $id)->first();
+        // $kategori = DB::table('kategori')->where(' id', $id)->first();
+        $kategori = Kategori::find($id);
         return view("kategori.edit", compact('kategori'));
     }
 
@@ -34,7 +40,10 @@ class KategoriController extends Controller
     {
         $nama_kategori = $request->nama_kategori;
         try {
-            DB::table('kategori')->insert([
+            // DB::table('kategori')->insert([
+            //     'nama_kategori' => $nama_kategori
+            // ]);
+            Kategori::create([
                 'nama_kategori' => $nama_kategori
             ]);
             return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan.');
@@ -48,7 +57,15 @@ class KategoriController extends Controller
         $nama_kategori = $request->input('nama_kategori');
 
         try {
-            DB::table('kategori')->where('id', $id)->update([
+            // DB::table('kategori')->where('id', $id)->update([
+            //     'nama_kategori' => $nama_kategori
+            // ]);
+
+            // $kategori= Kategori::find($id);
+            // $kategori->update([
+            //     'nama_kategori' => $nama_kategori
+            // ]);
+            Kategori::where('id', $id)->update([
                 'nama_kategori' => $nama_kategori
             ]);
             return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui.');
@@ -60,7 +77,8 @@ class KategoriController extends Controller
     public function destroy($id)
     {
         try {
-            DB::table('kategori')->where('id', $id)->delete();
+            // DB::table('kategori')->where('id', $id)->delete();
+            Kategori::where('id', $id)->delete();
             return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('kategori.index')->with('error', 'Terjadi kesalahan saat menghapus data.');

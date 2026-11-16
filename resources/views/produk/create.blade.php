@@ -5,19 +5,35 @@
     <table>
         <tr>
             <td>Kode</td>
-            <td><input type="text" name="kode_produk" value="{{ old('kode_produk') }}"></td>
+            <td><input type="text" name="kode_produk" required value="{{old('kode_produk')}}">
+            @error('kode_produk')
+                <div class="error" style="color: red;">{{ $message }}</div>
+            @enderror
+        </td>
         </tr>
         <tr>
             <td>Nama Produk</td>
-            <td><input type="text" name="nama_produk" value="{{ old('nama_produk') }}"></td>
+            <td><input type="text" name="nama_produk" required value="{{old('nama_produk')}}">
+            @error('nama_produk')
+                <div class="error" style="color: red;">{{ $message }}</div>
+            @enderror
+        </td>
         </tr>
         <tr>
             <td>Harga</td>
-            <td><input type="number" name="harga" value="{{ old('harga') }}"></td>
+            <td><input type="number" name="harga" required value="{{old('harga')}}">
+            @error('harga')
+                <div class="error" style="color: red;">{{ $message }}</div>
+            @enderror
+        </td>
         </tr>
         <tr>
             <td>Stok</td>
-            <td><input type="number" name="stok" value="{{ old('stok') }}"></td>
+            <td><input type="number" name="stok" required value="{{old('stok')}}">
+            @error('stok')
+                <div class="error" style="color: red;">{{ $message }}</div>
+            @enderror
+        </td>
         </tr>
         <tr>
             <td>Kategori</td>
